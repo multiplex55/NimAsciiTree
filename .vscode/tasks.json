@@ -1,0 +1,144 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "nim: build current file (for debugging)",
+            "command": "nim",
+            "args": [
+                "compile",
+                "-g",
+                "--debugger:native",
+                "-o:${workspaceRoot}/bin/${fileBasenameNoExtension}",
+                "${relativeFile}"
+            ],
+            "options": {
+                "cwd": "${workspaceRoot}"
+            },
+            "type": "shell",
+            "problemMatcher": [
+                "$nim"
+            ]
+        },
+        {
+            "label": "Build Nim Program (C)",
+            "type": "shell",
+            "command": "nim",
+            "args": [
+                "c",
+                "-g",
+                "--out:bin/${fileBasenameNoExtension}",
+                "${file}"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": [],
+            "detail": "Compile Nim code to C with LLDB debug symbols."
+        },
+        {
+            "label": "Build Nim Program (C++)",
+            "type": "shell",
+            "command": "nim",
+            "args": [
+                "cpp",
+                "-g",
+                "--out:bin/${fileBasename}",
+                "${file}"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "problemMatcher": [],
+            "detail": "Compile Nim code to C++ with LLDB debug symbols."
+        },
+        {
+            "label": "Run Nim Program C - Release",
+            "type": "shell",
+            "command": "nim",
+            "args": [
+                "c",
+                "-d:release",
+                "-r",
+                "--out:bin/${fileBasenameNoExtension}",
+                "${file}"
+            ],
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Run Nim Program C++",
+            "type": "shell",
+            "command": "nim",
+            "args": [
+                "cpp",
+                "-d:release",
+                "-r",
+                "--out:bin/${fileBasenameNoExtension}",
+                "${file}"
+            ],
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Run Nim Program C++ - ADVENT OF CODE",
+            "type": "shell",
+            "command": "nim",
+            "args": [
+                "cpp",
+                "-d:release",
+                "-r",
+                "--out:bin/AdventOfCodeNim.exe",
+                "--stacktrace:on",
+                "--lineTrace:on",
+                "--threads:on",
+                "--checks:on",
+                "src/AdventOfCodeNim.nim",
+            ],
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Run Nim Program C++ - ADVENT OF CODE - REDIRECT",
+            "type": "shell",
+            "command": "nim",
+            "args": [
+                "cpp",
+                "-d:release",
+                "-r",
+                "--out:bin/AdventOfCodeNim.exe",
+                "src/AdventOfCodeNim.nim",
+                ">",
+                "output_debug.txt"
+            ],
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "pp : Run Nim Pretty",
+            "type": "shell",
+            "command": "nimpretty",
+            "args": [
+                "${file}"
+            ],
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
+            "problemMatcher": []
+        }
+    ]
+}
